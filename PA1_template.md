@@ -1,10 +1,8 @@
---- 
-title: "Untitled" 
+---
 output: 
   html_document: 
-    keep_md: true 
+    keep_md: yes
 ---
-
 
 ```global
 library(knitr)
@@ -17,11 +15,11 @@ getwd()
 ```
 
 ```
-## [1] "C:/Users/51666/Desktop/R coursera/course 5 project 1"
+## [1] "C:/Users/51666/Desktop/RepData_PeerAssessment1"
 ```
 
 ```r
-data<-read.csv("./activity.csv")
+data<-read.csv("C:/Users/51666/Desktop/R coursera/course 5 project 1/activity.csv")
 library(ggplot2)
 library(dplyr)
 ```
