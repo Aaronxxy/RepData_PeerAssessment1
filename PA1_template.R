@@ -1,36 +1,18 @@
-```{global option}
-library(knitr)
-knitr::opts_chunk$set(warning=FALSE,echo = TRUE)
-```
-Reading of data
-```{r}
-getwd()
-data<-read.csv("./activity.csv")
+data<-read.csv("./course 5 project 1/activity.csv")
 library(ggplot2)
 library(dplyr)
 head(data)
 summary(data)
-```
-###Diagram 1 
-```{r}
 data1<- data%>%
         group_by(date)%>%
         summarise(total = sum(steps,na.rm = T))
 hist(data1$total,breaks = seq(0,25000, by = 2500),
         xlab = "Total steps per day",main = "histogram of total steps per day",
         col = "red")
-```
 
-Mean and median number of steps taken each day
-```{r}
 mean1<- mean(data$steps,na.rm = T)
 median1<- median(data$steps, na.rm = T)
-print(mean1);print(median1)
-```
-  
 
-Diagram 2 
-```{r}
 data2<- data%>%
         group_by(date)%>%
         summarise(mean = mean(steps,na.rm = T),
@@ -42,28 +24,16 @@ g2 + geom_line()+
         labs(title = "Mean steps per day",
                 y = "Mean steps",
                 x = "Date")
-```
 
-The 5-minute interval that, on average, contains the maximum number of steps
-
-```{r}
 data3<- data%>%
         group_by(interval)%>%
         summarise(mean = mean(steps,na.rm = T),
                 max = max(steps,na.rm = T))
-data3
-```
 
-Number of missing value
-
-```{r}
+##imputing missing value
 datana<- data %>%
         filter(is.na(steps))
 nrow(datana)
-```
-
-Imputing and diagram
-```{r}
 datana$steps <- data3$mean[match(datana$interval, data3$interval)]
 data$steps[is.na(data$steps)] <- datana$steps
 
@@ -73,10 +43,8 @@ data4<- data%>%
 hist(data4$total,breaks = seq(0,25000, by = 2500),
         xlab = "Total steps per day",main = "histogram of total steps per day",
         col = "red")
-```
 
-Diagram 5
-```{r}
+##weekdays and weekend
 Sys.setlocale(locale="English_United States") 
 data$days <- ifelse(weekdays(as.Date(data$date)) == c("Saturday","Sunday"),"weekends","weekdays")
 
@@ -90,6 +58,7 @@ g3 + geom_line()+
         theme_grey()+
         ggtitle("Mean Steps per interval of week/weekend")+
         labs(y = "Mean Steps")
-```
+
+
 
 
