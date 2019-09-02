@@ -3,9 +3,9 @@ library(knitr)
 knitr::opts_chunk$set(warning=FALSE,echo = TRUE)
 ```
 Reading of data
-```{r}
+```{r, echo = TRUE}
 getwd()
-data<-read.csv("./activity.csv")
+data<-read.csv("C:/Users/51666/Desktop/R coursera/course 5 project 1/activity.csv")
 library(ggplot2)
 library(dplyr)
 head(data)
