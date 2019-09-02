@@ -12,7 +12,7 @@ head(data)
 summary(data)
 ```
 ###Diagram 1 
-```{r}
+```{r, fig.height=4}
 data1<- data%>%
         group_by(date)%>%
         summarise(total = sum(steps,na.rm = T))
@@ -30,7 +30,7 @@ print(mean1);print(median1)
   
 
 Diagram 2 
-```{r}
+```{r,fig.height=4}
 data2<- data%>%
         group_by(date)%>%
         summarise(mean = mean(steps,na.rm = T),
@@ -63,7 +63,7 @@ nrow(datana)
 ```
 
 Imputing and diagram
-```{r}
+```{r,fig.height=4}
 datana$steps <- data3$mean[match(datana$interval, data3$interval)]
 data$steps[is.na(data$steps)] <- datana$steps
 
@@ -76,7 +76,7 @@ hist(data4$total,breaks = seq(0,25000, by = 2500),
 ```
 
 Diagram 5
-```{r}
+```{r,fig.height=6}
 Sys.setlocale(locale="English_United States") 
 data$days <- ifelse(weekdays(as.Date(data$date)) == c("Saturday","Sunday"),"weekends","weekdays")
 
